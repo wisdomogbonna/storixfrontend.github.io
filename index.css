@@ -1,0 +1,30 @@
+body {
+  background-color: #ffffff;
+  color: #111;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header, nav, button {
+  background-color: #b30000;
+  color: white;
+}
+
+.notice {
+  background: #ffeaea;
+  color: #b30000;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background-color: #e60000;
+}
+
+a {
+  color: #b30000;
+  text-decoration: none;
+}
