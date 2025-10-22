@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./SplashScreen.css";
 
-export default function SplashScreen({ onFinish }) {
+export default function SplashScreen() {
   const [visible, setVisible] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Hide splash after 3 seconds
     const timer = setTimeout(() => {
       setVisible(false);
-      onFinish();
+      navigate("/login"); // 👈 Redirect after splash
     }, 3000);
+
     return () => clearTimeout(timer);
-  }, [onFinish]);
+  }, [navigate]);
 
   if (!visible) return null;
 
