@@ -1,34 +1,31 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SplashScreen from "./components/SplashScreen";
-import Home from "./pages/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Premium from "./pages/Premium";
-import Contact from "./pages/Contact";
-import StoryPage from "./pages/StoryPage";
-import OwnerDashboard from "./components/OwnerDashboard";
+import StoryList from "./components/StoryList";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  const [showSplash, setShowSplash] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("token"));
 
   return (
     <Router>
-      {showSplash ? (
-        <SplashScreen onFinish={() => setShowSplash(false)} />
-      ) : (
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/premium" element={<Premium />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/story/:id" element={<StoryPage />} />
-          <Route path="/owner" element={<OwnerDashboard />} />
-        </Routes>
-      )}
+      <Routes>
+        <Route path="/" element={<SplashScreen />} />
+        <Route path="/login" element={<Login onLogin={() => setIsAuthenticated(true)} />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/stories"
+          element={
+            <ProtectedRoute>
+              <StoryList />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
     </Router>
   );
 }
 
-export default App;;
+export default App;
