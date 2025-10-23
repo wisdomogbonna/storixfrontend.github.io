@@ -7,7 +7,7 @@ import StoryList from "./components/StoryList";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("token"));
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("user"));
 
   return (
     <Router>
