@@ -1,105 +1,74 @@
 import React, { useState } from "react";
-import "./Login.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
-const API_URL = process.env.REACT_APP_API_URL || "https://storixback.onrender.com";
+const API_URL = process.env.REACT_APP_API_URL;
 
 export default function Login() {
-  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+    const [password, setPassword] = useState("");
+      const [showPassword, setShowPassword] = useState(false);
+        const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
+          const handleSubmit = async (e) => {
+              e.preventDefault();
+                  setLoading(true);
+                      try {
+                            const res = await axios.post(`${API_URL}/api/auth/login`, { email, password });
+                                  localStorage.setItem("user", JSON.stringify(res.data.user));
+                                        alert("✅ Login successful!");
+                                              window.location.href = "/stories";
+                                                  } catch (err) {
+                                                        console.error("Login failed:", err);
+                                                              alert("❌ Login failed. Please check your email or password.");
+                                                                  } finally {
+                                                                        setLoading(false);
+                                                                            }
+                                                                              };
 
-    try {
-      if (isLogin) {
-        // LOGIN
-        const res = await axios.post(`${API_URL}/api/users/login`, {
-          email,
-          password,
-        });
-        localStorage.setItem("token", res.data.token);
-        navigate("/stories");
-      } else {
-        // REGISTER
-        await axios.post(`${API_URL}/api/users/register`, {
-          name,
-          email,
-          password,
-        });
-        alert("Registration successful! Please log in.");
-        setIsLogin(true);
-      }
-    } catch (err) {
-      setError(err.response?.data?.message || "Something went wrong. Try again.");
-    }
-  };
+                                                                                return (
+                                                                                    <div className="login-container">
+                                                                                          <div className="login-box">
+                                                                                                  <h1 className="app-title">Storix</h1>
+                                                                                                          <p className="tagline">Where stories come alive</p>
 
-  return (
-    <div className="auth-container">
-      <div className="auth-box">
-        <h1 className="logo">Storix</h1>
-        <p className="tagline">Read. Imagine. Discover.</p>
+                                                                                                                  <form onSubmit={handleSubmit}>
+                                                                                                                            <input
+                                                                                                                                        type="email"
+                                                                                                                                                    placeholder="Email address"
+                                                                                                                                                                value={email}
+                                                                                                                                                                            onChange={(e) => setEmail(e.target.value)}
+                                                                                                                                                                                        required
+                                                                                                                                                                                                  />
 
-        {error && <div className="error-box">{error}</div>}
+                                                                                                                                                                                                            <div className="password-container">
+                                                                                                                                                                                                                        <input
+                                                                                                                                                                                                                                      type={showPassword ? "text" : "password"}
+                                                                                                                                                                                                                                                    placeholder="Password"
+                                                                                                                                                                                                                                                                  value={password}
+                                                                                                                                                                                                                                                                                onChange={(e) => setPassword(e.target.value)}
+                                                                                                                                                                                                                                                                                              required
+                                                                                                                                                                                                                                                                                                          />
+                                                                                                                                                                                                                                                                                                                      <button
+                                                                                                                                                                                                                                                                                                                                    type="button"
+                                                                                                                                                                                                                                                                                                                                                  className="show-btn"
+                                                                                                                                                                                                                                                                                                                                                                onClick={() => setShowPassword(!showPassword)}
+                                                                                                                                                                                                                                                                                                                                                                            >
+                                                                                                                                                                                                                                                                                                                                                                                          {showPassword ? "Hide" : "Show"}
+                                                                                                                                                                                                                                                                                                                                                                                                      </button>
+                                                                                                                                                                                                                                                                                                                                                                                                                </div>
 
-        <form className="auth-form" onSubmit={handleSubmit}>
-          {!isLogin && (
-            <input
-              type="text"
-              placeholder="Full name"
-              className="input-field"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          )}
-          <input
-            type="email"
-            placeholder="Email address"
-            className="input-field"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="input-field"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+                                                                                                                                                                                                                                                                                                                                                                                                                          <button type="submit" className="login-btn" disabled={loading}>
+                                                                                                                                                                                                                                                                                                                                                                                                                                      {loading ? "Logging in..." : "Log In"}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                </button>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        </form>
 
-          <button type="submit" className="auth-btn">
-            {isLogin ? "Login" : "Register"}
-          </button>
-        </form>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div className="divider"></div>
 
-        <div className="toggle-text">
-          {isLogin ? (
-            <>
-              Don’t have an account?{" "}
-              <span onClick={() => setIsLogin(false)}>Create one</span>
-            </>
-          ) : (
-            <>
-              Already have an account?{" "}
-              <span onClick={() => setIsLogin(true)}>Login</span>
-            </>
-          )}
-        </div>
-      </div>
-
-      <footer className="auth-footer">
-        <p>© 2025 Storix Entertainment</p>
-      </footer>
-    </div>
-  );
-}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <a href="/register" className="create-account">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Create New Account
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      );
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      }

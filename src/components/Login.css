@@ -1,133 +1,101 @@
-/* ===== General Page Layout ===== */
-.auth-container {
-  background-color: #ffffff;
-    color: #222;
-      font-family: 'Poppins', sans-serif;
+/* Login.css - Red & White Modern Facebook-style */
+body {
+  margin: 0;
+    background-color: #fff;
+      font-family: "Poppins", sans-serif;
+      }
+
+      .login-container {
         display: flex;
-          flex-direction: column;
+          align-items: center;
             justify-content: center;
-              align-items: center;
-                height: 100vh;
-                  padding: 1rem;
-                    text-align: center;
-                    }
+              height: 100vh;
+                background: linear-gradient(180deg, #ff3b3b, #ff5c5c);
+                }
 
-                    /* ===== Login/Register Card ===== */
-                    .auth-box {
-                      background-color: #fff;
-                        border-radius: 12px;
-                          box-shadow: 0 4px 15px rgba(200, 16, 46, 0.2);
-                            padding: 2rem 2.5rem;
-                              width: 100%;
-                                max-width: 380px;
-                                  border: 2px solid #c8102e;
-                                    transition: all 0.3s ease-in-out;
-                                    }
+                .login-box {
+                  background-color: #ffffff;
+                    padding: 40px 35px;
+                      border-radius: 10px;
+                        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+                          text-align: center;
+                            width: 90%;
+                              max-width: 400px;
+                              }
 
-                                    .auth-box:hover {
-                                      transform: translateY(-3px);
+                              .app-title {
+                                color: #e60000;
+                                  font-size: 40px;
+                                    font-weight: 700;
+                                      margin-bottom: 10px;
                                       }
 
-                                      /* ===== Logo & Tagline ===== */
-                                      .logo {
-                                        font-size: 2.2rem;
-                                          font-weight: 700;
-                                            color: #c8102e;
-                                              margin-bottom: 0.3rem;
-                                              }
+                                      .tagline {
+                                        color: #666;
+                                          font-size: 14px;
+                                            margin-bottom: 25px;
+                                            }
 
-                                              .tagline {
-                                                font-size: 0.95rem;
-                                                  color: #444;
-                                                    margin-bottom: 1.5rem;
-                                                    }
+                                            form input {
+                                              width: 100%;
+                                                padding: 12px 14px;
+                                                  margin: 10px 0;
+                                                    border: 1px solid #ddd;
+                                                      border-radius: 6px;
+                                                        font-size: 15px;
+                                                          outline: none;
+                                                          }
 
-                                                    /* ===== Form ===== */
-                                                    .auth-form {
-                                                      display: flex;
-                                                        flex-direction: column;
-                                                        }
+                                                          .password-container {
+                                                            position: relative;
+                                                            }
 
-                                                        .input-field {
-                                                          padding: 0.8rem;
-                                                            margin-bottom: 1rem;
-                                                              border: 1px solid #ccc;
-                                                                border-radius: 6px;
-                                                                  font-size: 1rem;
-                                                                    outline: none;
-                                                                      transition: border-color 0.3s;
-                                                                      }
+                                                            .show-btn {
+                                                              position: absolute;
+                                                                right: 12px;
+                                                                  top: 10px;
+                                                                    background: none;
+                                                                      border: none;
+                                                                        color: #e60000;
+                                                                          cursor: pointer;
+                                                                            font-weight: 600;
+                                                                            }
 
-                                                                      .input-field:focus {
-                                                                        border-color: #c8102e;
-                                                                        }
+                                                                            .login-btn {
+                                                                              width: 100%;
+                                                                                padding: 12px;
+                                                                                  background-color: #e60000;
+                                                                                    color: white;
+                                                                                      border: none;
+                                                                                        border-radius: 6px;
+                                                                                          font-size: 16px;
+                                                                                            cursor: pointer;
+                                                                                              font-weight: bold;
+                                                                                                margin-top: 10px;
+                                                                                                  transition: background 0.3s;
+                                                                                                  }
 
-                                                                        /* ===== Button ===== */
-                                                                        .auth-btn {
-                                                                          background-color: #c8102e;
-                                                                            color: #fff;
-                                                                              padding: 0.9rem;
-                                                                                border: none;
-                                                                                  border-radius: 6px;
-                                                                                    font-size: 1rem;
-                                                                                      font-weight: 600;
-                                                                                        cursor: pointer;
-                                                                                          transition: background-color 0.3s ease-in-out, transform 0.2s;
-                                                                                          }
+                                                                                                  .login-btn:hover {
+                                                                                                    background-color: #cc0000;
+                                                                                                    }
 
-                                                                                          .auth-btn:hover {
-                                                                                            background-color: #a30e27;
-                                                                                              transform: scale(1.02);
-                                                                                              }
+                                                                                                    .divider {
+                                                                                                      height: 1px;
+                                                                                                        background-color: #ddd;
+                                                                                                          margin: 25px 0;
+                                                                                                          }
 
-                                                                                              /* ===== Error Box ===== */
-                                                                                              .error-box {
-                                                                                                background-color: #ffe0e0;
-                                                                                                  color: #c8102e;
-                                                                                                    border: 1px solid #c8102e;
-                                                                                                      padding: 0.6rem;
-                                                                                                        border-radius: 5px;
-                                                                                                          margin-bottom: 1rem;
-                                                                                                            font-size: 0.95rem;
-                                                                                                            }
-
-                                                                                                            /* ===== Toggle Text (Switch between Login & Register) ===== */
-                                                                                                            .toggle-text {
-                                                                                                              margin-top: 1rem;
-                                                                                                                font-size: 0.95rem;
-                                                                                                                  color: #444;
-                                                                                                                  }
-
-                                                                                                                  .toggle-text span {
-                                                                                                                    color: #c8102e;
-                                                                                                                      font-weight: 600;
-                                                                                                                        cursor: pointer;
-                                                                                                                          transition: color 0.2s;
+                                                                                                          .create-account {
+                                                                                                            display: inline-block;
+                                                                                                              background-color: #ff3b3b;
+                                                                                                                color: #fff;
+                                                                                                                  text-decoration: none;
+                                                                                                                    padding: 12px 18px;
+                                                                                                                      border-radius: 6px;
+                                                                                                                        font-weight: bold;
+                                                                                                                          transition: 0.3s;
                                                                                                                           }
 
-                                                                                                                          .toggle-text span:hover {
-                                                                                                                            color: #a30e27;
+                                                                                                                          .create-account:hover {
+                                                                                                                            background-color: #cc0000;
                                                                                                                             }
-
-                                                                                                                            /* ===== Footer ===== */
-                                                                                                                            .auth-footer {
-                                                                                                                              margin-top: 1.5rem;
-                                                                                                                                color: #999;
-                                                                                                                                  font-size: 0.85rem;
-                                                                                                                                  }
-
-                                                                                                                                  /* ===== Responsive Design ===== */
-                                                                                                                                  @media (max-width: 480px) {
-                                                                                                                                    .auth-box {
-                                                                                                                                        padding: 1.5rem;
-                                                                                                                                            width: 90%;
-                                                                                                                                              }
-
-                                                                                                                                                .logo {
-                                                                                                                                                    font-size: 1.9rem;
-                                                                                                                                                      }
-
-                                                                                                                                                        .auth-btn {
-                                                                                                                                                            padding: 0.8rem;
-                                                                                                                                                              }
-                                                                                                                                                              }
