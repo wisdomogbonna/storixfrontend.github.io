@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./Login.css"; // ✅ uses your existing CSS
+import "./Login.css";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = "https://storixback.onrender.com";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -15,15 +15,10 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const res = await axios.post(`${API_URL}/api/auth/login`, {
-        email,
-        password,
-      });
-
-      // ✅ Save session info locally
+      const res = await axios.post(`${API_URL}/api/auth/login`, { email, password });
       localStorage.setItem("user", JSON.stringify(res.data.user));
       alert("✅ Login successful!");
-      window.location.replace("/stories"); // redirect safely
+      window.location.href = "/stories";
     } catch (err) {
       console.error("Login failed:", err);
       alert("❌ Login failed. Please check your email or password.");

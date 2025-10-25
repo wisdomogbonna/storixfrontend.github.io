@@ -1,9 +1,15 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
-const ProtectedRoute = ({ children }) => {
-  const token = localStorage.getItem("token");
-    return token ? children : <Navigate to="/login" />;
-    };
+export default function ProtectedRoute({ children }) {
+  // Check if a user exists in localStorage (from login)
+    const user = JSON.parse(localStorage.getItem("user"));
 
-    export default ProtectedRoute;
+      // If not logged in, send to /login
+        if (!user) {
+            return <Navigate to="/login" replace />;
+              }
+
+                // Otherwise, show the protected content (stories, etc.)
+                  return children;
+                  }6
