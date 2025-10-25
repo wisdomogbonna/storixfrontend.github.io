@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./Login.css"; // ✅ Uses your existing CSS file
+import "./Login.css"; // ✅ uses your existing CSS
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -13,18 +13,17 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     try {
-      // ✅ Match backend route
       const res = await axios.post(`${API_URL}/api/auth/login`, {
         email,
         password,
       });
 
-      // ✅ Store user session locally
+      // ✅ Save session info locally
       localStorage.setItem("user", JSON.stringify(res.data.user));
-
       alert("✅ Login successful!");
-      window.location.href = "/stories";
+      window.location.replace("/stories"); // redirect safely
     } catch (err) {
       console.error("Login failed:", err);
       alert("❌ Login failed. Please check your email or password.");
